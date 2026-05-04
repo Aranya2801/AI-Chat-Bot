@@ -3,7 +3,12 @@
 <!-- Animated Header Banner -->
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=AI%20Chat%20Bot&fontSize=60&fontColor=fff&animation=twinkling&fontAlignY=35&desc=Advanced%20GPT-4o%20Powered%20Conversational%20AI&descAlignY=55&descSize=18" width="100%"/>
 
+<!-- Animated Typing SVG -->
+<a href="https://github.com/Aranya2801/AI-Chat-Bot">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=818CF8&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=60&lines=✦+AI+Chat+Bot+%E2%80%94+Your+Intelligent+Assistant;Real-time+Streaming+%7C+Multi-Model+%7C+Beautiful+UI" alt="Typing SVG" />
+</a>
 
+<br/>
 
 <!-- Badges Row 1 -->
 <p>
