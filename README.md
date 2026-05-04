@@ -5,7 +5,7 @@
 
 <!-- Animated Typing SVG -->
 <a href="https://github.com/Aranya2801/AI-Chat-Bot">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=818CF8&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=60&lines=✦+AI+Chat+Bot+%E2%80%94+Your+Intelligent+Assistant;Real-time+Streaming+%7C+Multi-Model+%7C+Beautiful+UI" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=818CF8&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=60&lines=✦+AI+Chat+Bot+%E2%80%94+Your+Intelligent+Assistant;Real-time+Streaming+%7C+Multi-Model+%7C+Beautiful+UI" alt />
 </a>
 
 <br/>
