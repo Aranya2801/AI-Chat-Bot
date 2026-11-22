@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-22T15:08:34.529Z",
+  "embedModel": null,
+  "results": [
+    {
+      "chunkSize": 400,
+      "chunks": 30,
+      "mode": "bm25",
+      "all": {
+        "R@1": 0.71875,
+        "R@3": 0.8125,
+        "R@5": 0.90625,
+        "MRR@10": 0.79453125
+      },
+      "keyword": {
+        "R@1": 1,
+        "R@3": 1,
+        "R@5": 1,
+        "MRR@10": 1
+      },
+      "paraphrase": {
+        "R@1": 0.64,
+        "R@3": 0.76,
+        "R@5": 0.88,
+        "MRR@10": 0.7369999999999999
+      },
+      "misses": [
+        "What happens if I'm ill for more than two weeks?",
+        "How long does the drone stay in the air on one battery?",
+        "Why won't the motors start in cold weather?"
+      ]
+    },
+    {
+      "chunkSize": 800,
+      "chunks": 15,
+      "mode": "bm25",
+      "all": {
+        "R@1": 0.71875,
+        "R@3": 0.875,
+        "R@5": 1,
+        "MRR@10": 0.8213541666666666
+      },
+      "keyword": {
+        "R@1": 1,
+        "R@3": 1,
+        "R@5": 1,
+        "MRR@10": 1
+      },
+      "paraphrase": {
+        "R@1": 0.64,
+        "R@3": 0.84,
+        "R@5": 1,
+        "MRR@10": 0.7713333333333332
+      },
+      "misses": []
+    },
+    {
+      "chunkSize": 1200,
+      "chunks": 9,
+      "mode": "bm25",
+      "all": {
+        "R@1": 0.75,
+        "R@3": 1,
+        "R@5": 1,
+        "MRR@10": 0.859375
+      },
+      "keyword": {
+        "R@1": 1,
+        "R@3": 1,
+        "R@5": 1,
+        "MRR@10": 1
+      },
+      "paraphrase": {
+        "R@1": 0.68,
+        "R@3": 1,
+        "R@5": 1,
+        "MRR@10": 0.82
+      },
+      "misses": []
+    }
+  ]
+}
