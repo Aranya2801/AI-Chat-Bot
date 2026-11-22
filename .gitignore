@@ -37,3 +37,6 @@ yarn-error.log*
 .cache/
 .parcel-cache/
 .eslintcache
+
+# eval cache (embeddings, can be regenerated)
+eval/.cache/

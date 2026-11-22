@@ -5,18 +5,23 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    open: true,
+    // the api server runs separately in dev (npm run dev starts both)
+    proxy: {
+      "/api": "http://localhost:8787",
+    },
   },
   build: {
-    outDir: "dist",
-    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
           react: ["react", "react-dom"],
-          markdown: ["marked", "highlight.js"],
+          markdown: ["marked", "marked-highlight", "highlight.js/lib/common", "dompurify"],
         },
       },
     },
+  },
+  test: {
+    environment: "node",
+    include: ["tests/**/*.test.js"],
   },
 });
