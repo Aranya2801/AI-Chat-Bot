@@ -1,327 +1,166 @@
-<div align="center">
+# AI Chat Bot
 
-<!-- Animated Header Banner -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=AI%20Chat%20Bot&fontSize=60&fontColor=fff&animation=twinkling&fontAlignY=35&desc=Advanced%20GPT-4o%20Powered%20Conversational%20AI&descAlignY=55&descSize=18" width="100%"/>
+A streaming chat interface for LLMs that can also answer questions from your own documents, with citations.
 
-<!-- Animated Typing SVG -->
-<a href="https://github.com/Aranya2801/AI-Chat-Bot">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=818CF8&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=60&lines=✦+AI+Chat+Bot+%E2%80%94+Your+Intelligent+Assistant;Real-time+Streaming+%7C+Multi-Model+%7C+Beautiful+UI" alt />
-</a>
+It works with OpenAI or any OpenAI-compatible API (Groq, Together, OpenRouter, a local Ollama). Document retrieval is hybrid: dense embeddings plus BM25, merged with reciprocal rank fusion. The repo includes a small benchmark that compares the retrieval methods.
 
-<br/>
+![Chat](docs/chat.png)
 
-<!-- Badges Row 1 -->
-<p>
-  <img src="https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React"/>
-  <img src="https://img.shields.io/badge/Vite-5.3-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite"/>
-  <img src="https://img.shields.io/badge/OpenAI-GPT--4o-10A37F?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI"/>
-  <img src="https://img.shields.io/badge/JavaScript-ES2024-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/>
-</p>
+## Features
 
-<!-- Badges Row 2 -->
-<p>
-  <img src="https://img.shields.io/github/stars/Aranya2801/AI-Chat-Bot?style=for-the-badge&color=818cf8&labelColor=1a1a2e" alt="Stars"/>
-  <img src="https://img.shields.io/github/forks/Aranya2801/AI-Chat-Bot?style=for-the-badge&color=818cf8&labelColor=1a1a2e" alt="Forks"/>
-  <img src="https://img.shields.io/github/issues/Aranya2801/AI-Chat-Bot?style=for-the-badge&color=f59e0b&labelColor=1a1a2e" alt="Issues"/>
-  <img src="https://img.shields.io/github/license/Aranya2801/AI-Chat-Bot?style=for-the-badge&color=10b981&labelColor=1a1a2e" alt="License"/>
-  <img src="https://img.shields.io/badge/PRs-Welcome-6366f1?style=for-the-badge&labelColor=1a1a2e" alt="PRs Welcome"/>
-</p>
+- Token-by-token streaming, with a stop button that also cancels the upstream request
+- Edit any earlier message and resend it, or regenerate the last answer
+- Markdown with syntax highlighting; the HTML is sanitized before rendering
+- Conversations saved in localStorage, with search, rename and export to Markdown
+- Settings for model, system prompt, temperature, max tokens and retrieval
+- Per-reply latency stats: time to first token, total time and approximate tokens/sec
+- **Document Q&A**: add `.txt` / `.md` / source files, ask questions, and get answers that cite numbered excerpts you can expand to check
+- Works without an embeddings endpoint: if the provider doesn't have one, it falls back to BM25 keyword search
+- The API key stays on the server. The browser only ever talks to `/api/*`
 
-<!-- Badges Row 3 -->
-<p>
-  <img src="https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node"/>
-  <img src="https://img.shields.io/badge/Deployed_on-Vercel-000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"/>
-  <img src="https://img.shields.io/badge/CI/CD-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI/CD"/>
-  <img src="https://img.shields.io/badge/Streaming-Real--time-ec4899?style=for-the-badge" alt="Streaming"/>
-</p>
+![Document Q&A with sources](docs/documents.png)
 
-<br/>
+## Running it
 
-<!-- Demo GIF placeholder — replace with your actual screen recording -->
-<img src="https://raw.githubusercontent.com/Aranya2801/AI-Chat-Bot/main/docs/demo.gif" alt="AI Chat Bot Demo" width="80%" style="border-radius:12px; border: 2px solid #6366f1"/>
-
-</div>
-
----
-
-## 🌟 What is AI Chat Bot?
-
-**AI Chat Bot** is a production-grade, open-source conversational AI interface built with React and powered by OpenAI's GPT-4o. It delivers real-time streaming responses, supports multiple AI models, saves your full conversation history, and renders rich Markdown with syntax-highlighted code — all wrapped in a stunning dark/light adaptive UI.
-
-> Designed for **daily use** — fast, beautiful, and fully yours.
-
----
-
-## ✨ Features
-
-<table>
-<tr>
-<td width="50%">
-
-### 🧠 AI & Intelligence
-- **GPT-4o / GPT-4 Turbo / GPT-3.5** support
-- Real-time **streaming responses** (SSE)
-- Configurable **system prompt** for custom personas
-- Adjustable **temperature & max tokens**
-- Smart **auto-title generation** for chats
-
-</td>
-<td width="50%">
-
-### 🎨 Interface & UX
-- Stunning **dark & light theme** with smooth transitions
-- **Animated welcome screen** with feature cards
-- **Typing indicator** with bouncing dots
-- **Markdown rendering** with GFM support
-- **Syntax highlighting** for 100+ languages
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 💬 Chat Management
-- **Unlimited conversations** stored locally
-- **Date-grouped** sidebar (Today / Yesterday / This Week)
-- One-click **delete conversations**
-- **Copy message** button on hover
-- Keyboard shortcut: **Enter** to send, **Shift+Enter** for newline
-
-</td>
-<td width="50%">
-
-### ⚡ Performance & DevX
-- **Vite** — blazing fast HMR and build
-- **CI/CD** via GitHub Actions → GitHub Pages
-- Zero-config **one-click deploy** to Vercel
-- Clean **component architecture** with Context API
-- **ESLint + Prettier** for code quality
-
-</td>
-</tr>
-</table>
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-| Requirement | Version |
-|-------------|---------|
-| Node.js | ≥ 20.x |
-| npm | ≥ 9.x |
-| OpenAI API Key | [Get one here →](https://platform.openai.com/api-keys) |
-
-### Installation
+You need Node 20 or newer.
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/Aranya2801/AI-Chat-Bot.git
 cd AI-Chat-Bot
-
-# 2. Install dependencies
 npm install
-
-# 3. Configure environment
-cp .env.example .env
-# Open .env and add your OpenAI API key
-
-# 4. Start the development server
-npm run dev
+cp .env.example .env      # put your key in LLM_API_KEY
+npm run dev               # web on :3000, api on :8787
 ```
 
-Open **http://localhost:3000** and start chatting! 🎉
-
----
-
-## 🔑 Configuration
-
-Edit your `.env` file:
+**Fully local with Ollama.** Install [Ollama](https://ollama.com), run `ollama pull llama3.1` and `ollama pull nomic-embed-text`, then set:
 
 ```env
-# Required — your OpenAI API key
-VITE_OPENAI_API_KEY=sk-your-api-key-here
-
-# Optional — use any OpenAI-compatible API endpoint
-VITE_API_BASE_URL=https://api.openai.com/v1
+LLM_BASE_URL=http://localhost:11434/v1
+LLM_API_KEY=
+EMBED_MODEL=nomic-embed-text
 ```
 
-> ⚠️ **Security**: Never commit your `.env` file. It's already in `.gitignore`.
+In the app, type `llama3.1` into the model field in settings.
 
----
-
-## 🏗️ Project Architecture
-
-```
-AI-Chat-Bot/
-├── 📁 .github/
-│   ├── 📁 workflows/
-│   │   └── ci.yml              # CI/CD — build, lint, deploy
-│   └── 📁 ISSUE_TEMPLATE/      # Bug & feature templates
-│
-├── 📁 src/
-│   ├── 📁 api/
-│   │   └── chatApi.js          # OpenAI streaming API layer
-│   │
-│   ├── 📁 components/
-│   │   ├── Header.jsx          # Top navbar with model switcher
-│   │   ├── Sidebar.jsx         # Conversation history panel
-│   │   ├── ChatWindow.jsx      # Main chat view
-│   │   ├── Message.jsx         # Individual message (Markdown + copy)
-│   │   ├── InputBar.jsx        # Smart input with suggestions
-│   │   └── WelcomeScreen.jsx   # Animated landing screen
-│   │
-│   ├── 📁 context/
-│   │   ├── ChatContext.jsx     # Global chat state (useReducer)
-│   │   └── ThemeContext.jsx    # Dark/light theme
-│   │
-│   ├── 📁 styles/
-│   │   └── globals.css         # Full design system with CSS vars
-│   │
-│   ├── App.jsx                 # Root component
-│   └── main.jsx                # React entry point
-│
-├── .env.example                # Environment template
-├── .gitignore
-├── index.html
-├── package.json
-├── vite.config.js
-├── CONTRIBUTING.md
-└── LICENSE
-```
-
----
-
-## 🔄 How Streaming Works
-
-```
-User types message → InputBar
-        ↓
-ChatContext.submitMessage()
-        ↓
-chatApi.sendMessage() — POST /v1/chat/completions (stream: true)
-        ↓
-Server-Sent Events stream opens
-        ↓
-data: {"choices":[{"delta":{"content":"Hello"}}]}  ← token by token
-        ↓
-onChunk(accumulated) → UPDATE_LAST_MESSAGE action
-        ↓
-React re-renders Message component in real-time
-        ↓
-Stream ends with data: [DONE]
-```
-
----
-
-## 🎨 Tech Stack
-
-<div align="center">
-
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Frontend** | React 18 | UI framework with hooks |
-| **Build Tool** | Vite 5 | Dev server & bundler |
-| **State** | useReducer + Context | Global chat state |
-| **Styling** | Pure CSS + Variables | Theming system |
-| **Markdown** | marked.js | Parsing & rendering |
-| **Syntax** | highlight.js | Code highlighting |
-| **AI API** | OpenAI / Compatible | GPT-4o streaming |
-| **Deploy** | GitHub Actions | CI/CD pipeline |
-| **Hosting** | Vercel / GitHub Pages | Static hosting |
-
-</div>
-
----
-
-## 🌐 Deploy in 1 Click
-
-### Vercel (Recommended)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Aranya2801/AI-Chat-Bot&env=VITE_OPENAI_API_KEY&envDescription=Your%20OpenAI%20API%20key&project-name=ai-chat-bot)
-
-> Add `VITE_OPENAI_API_KEY` in Vercel's environment variables.
-
-### GitHub Pages
-
-The CI/CD workflow auto-deploys to GitHub Pages on every push to `main`.
-
-Enable it: **Settings → Pages → Source → GitHub Actions**
-
----
-
-## 🛠️ Available Scripts
+**Production.** `npm run build && npm start` serves the built frontend and the API from a single Node process on port 8787. There's also a `Dockerfile`:
 
 ```bash
-npm run dev        # Start development server (http://localhost:3000)
-npm run build      # Production build → dist/
-npm run preview    # Preview production build locally
-npm run lint       # Lint with ESLint
-npm run format     # Format with Prettier
+docker build -t ai-chat-bot .
+docker run -p 8787:8787 --env-file .env ai-chat-bot
 ```
 
----
+If you deploy it publicly, set `ALLOWED_MODELS`. Otherwise anyone who finds the URL can run your most expensive model on your key.
 
-## 🤝 Contributing
+## How it works
 
-Contributions are warmly welcomed! Here's how:
+```
+Browser (React)                          server/index.js                  Provider
+───────────────                          ───────────────                  ────────
+InputBar ─► ChatContext.sendMessage
+             │
+             ├─ documents loaded?
+             │    embed(question) ─────► POST /api/embeddings ──────────► /embeddings
+             │    hybridRetrieve()        (key added here)
+             │      cosine top-20  ┐
+             │      BM25 top-20    ┴─► RRF ─► top k chunks
+             │    buildContextPrompt()  → numbered excerpts [1]..[k]
+             │
+             └─ streamChat() ─────────► POST /api/chat ────────────────► /chat/completions
+                  SSE parser ◄──────────── piped back as-is ◄──────────── (stream: true)
+                  rAF-batched UI updates
+```
 
-1. 🍴 **Fork** the repo
-2. 🌿 **Create** a branch: `git checkout -b feat/amazing-feature`
-3. 💾 **Commit**: `git commit -m "feat: add amazing feature"`
-4. 📤 **Push**: `git push origin feat/amazing-feature`
-5. 🔃 **Open a Pull Request**
+The main files:
 
-Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for full guidelines.
+| File | What it does |
+|---|---|
+| `server/index.js` | Proxy with no dependencies. Validates and clamps parameters, adds the key, pipes the SSE stream, cancels upstream when the client disconnects, serves `dist/` in production |
+| `src/lib/sse.js` | Incremental SSE parser that buffers partial lines |
+| `src/lib/rag.js` | Chunking, cosine similarity, RRF and the context prompt |
+| `src/lib/bm25.js` | BM25 index with a small tokenizer and stemmer |
+| `src/context/chatReducer.js` | All chat state transitions (pure, unit tested) |
+| `src/context/ChatContext.jsx` | Sending, streaming, stop/regenerate/edit, documents, persistence |
 
----
+## Retrieval evaluation
 
-## 🗺️ Roadmap
+`eval/` contains three short fictional documents (an HR handbook, a drone manual and a payments API reference) and 32 questions. Each question is labelled with the exact text that a correct retrieved chunk must contain. The documents are made up on purpose, so they can't be in any model's training data.
 
-- [x] Real-time streaming responses
-- [x] Multi-model selector (GPT-4o, GPT-4, GPT-3.5)
-- [x] Dark / light theme
-- [x] Markdown + code syntax highlighting
-- [x] Conversation history with sidebar
-- [x] CI/CD with GitHub Actions
-- [ ] 🔜 File & image upload (multimodal)
-- [ ] 🔜 Voice input (Whisper API)
-- [ ] 🔜 Chat export (PDF / Markdown)
-- [ ] 🔜 Prompt library & templates
-- [ ] 🔜 Plugin / MCP tool support
-- [ ] 🔜 Local LLM support (Ollama)
-- [ ] 🔜 Mobile app (React Native)
+Questions come in two types:
+- **keyword**: the question shares an exact token with the answer ("What does E-317 mean?")
+- **paraphrase**: the question uses different words than the document ("Can I take my leftover holidays into next year?" vs. "no more than 8 days roll into the next year")
 
----
+```bash
+npm run eval:retrieval             # BM25 only, no API key needed
+npm run eval:retrieval -- --dense  # adds embeddings and hybrid (uses .env, caches vectors)
+```
 
-## 📄 License
+BM25 results (chunk overlap 15%):
 
-This project is licensed under the **MIT License** — see [LICENSE](./LICENSE) for details.
+| chunk size | # chunks | R@1 | R@3 | R@5 | MRR@10 | R@5 keyword | R@5 paraphrase |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 400 | 30 | 71.9 | 81.3 | 90.6 | 0.795 | 100.0 | 88.0 |
+| 800 | 15 | 71.9 | 87.5 | 100.0 | 0.821 | 100.0 | 100.0 |
+| 1200 | 9 | 75.0 | 100.0 | 100.0 | 0.859 | 100.0 | 100.0 |
 
----
+What these numbers show:
+- BM25 never misses keyword questions. All of its misses are paraphrases, where the question and the document share no words ("ill for more than two weeks" vs. "sick leave ... certificate"). This is the gap embeddings are meant to close. Run with `--dense` to measure how much they close it, and whether hybrid keeps BM25's perfect keyword score.
+- Larger chunks look better here, but only partly because they are better. With 9 chunks in total, R@5 already covers more than half the corpus. A fair comparison of chunk sizes needs a much larger corpus. That's the obvious next step.
+- R@1 stays around 72–75% at every chunk size. The right chunk is usually *somewhere* in the top 3, which is why the app sends k = 4 chunks by default rather than 1.
 
-## 🙏 Acknowledgements
+The `--dense` run writes its own table and saves full per-question results to `eval/results/`.
 
-- [OpenAI](https://openai.com) for the GPT-4o API
-- [Vercel AI SDK](https://sdk.vercel.ai) for streaming inspiration
-- [marked.js](https://marked.js.org) for Markdown rendering
-- [highlight.js](https://highlightjs.org) for syntax highlighting
-- [Shields.io](https://shields.io) for beautiful badges
-- [Capsule Render](https://github.com/kyechan99/capsule-render) for the animated header
+## Latency benchmark
 
----
+```bash
+npm run bench -- gpt-4o-mini gpt-4o
+npm run bench -- --runs 10 llama3.1 qwen2.5    # with LLM_BASE_URL pointing at Ollama
+```
 
-<div align="center">
+The benchmark sends three fixed prompts per run at temperature 0, after one warm-up call. It reports median and p90 time to first token, plus median tokens/sec. The token count comes from the provider's `usage` field when available, otherwise chars/4. Raw data is saved as CSV in `eval/results/`.
 
-<!-- Profile Links -->
-<a href="https://github.com/Aranya2801">
-  <img src="https://img.shields.io/badge/Built_by-Aranya2801-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="Built by Aranya2801"/>
-</a>
+## Tests
 
-<br/><br/>
+```bash
+npm test
+```
 
-<!-- Animated Footer -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer&animation=twinkling" width="100%"/>
+31 tests. They cover:
+- the SSE parser, including a stream fed one character at a time
+- chunking, BM25, RRF and the fallback paths
+- the reducer, with regression tests for the v1 bugs listed below
+- an integration test that starts a fake OpenAI server and checks the proxy: streaming, key handling, parameter clamping and error passthrough
 
-</div>
+CI runs lint, tests, build and the BM25 eval on every push.
+
+## Bugs fixed from v1
+
+The first version looked finished but didn't actually work. These are written down because each one taught me something:
+
+1. **It didn't build.** All files were in the repo root, but the imports expected `src/components/...`.
+2. **The API key was public.** `VITE_*` env variables are inlined into the JS bundle, so anyone could read the key in devtools. The fix was the server proxy.
+3. **Missing words in replies.** The SSE parser split each network chunk on `\n`. When a JSON line was split across two reads, both halves failed to parse and were silently dropped. Now partial lines are buffered (see `tests/sse.test.js`).
+4. **No syntax highlighting.** marked v5+ removed the `highlight` option. The old config ran without error and did nothing.
+5. **XSS.** Model output went straight into `dangerouslySetInnerHTML`. Now it goes through DOMPurify first.
+6. **Two chats per message.** Both `InputBar` and `submitMessage` created a conversation when none was active.
+7. **Replies landing in the wrong chat.** Streaming updates were written to "the active conversation". If you switched chats mid-stream, the rest of the reply went into the other chat. Every action now carries an explicit `conversationId`.
+8. **Deleting the active chat could re-select it.** The next chat was picked from the list before filtering.
+9. **The README listed features that didn't exist**: saved history, settings, a demo GIF, a Vercel deployment. All of these are now real or removed.
+
+## Limitations
+
+- Uploaded documents live in memory and disappear when you refresh. Persisting the vectors (IndexedDB) is on the list.
+- Only text-based files are supported. PDF parsing isn't added yet.
+- Token counts in the UI are estimates (chars/4).
+- The eval corpus is small (3 documents, 32 questions). It's good for catching regressions and showing the keyword vs. paraphrase split, but too small to conclude much about chunk size.
+- There's no auth on the server. It's meant for personal or local use, or to run behind something that does auth.
+
+## Ideas for next
+
+- Store document vectors in IndexedDB so they survive a reload
+- PDF support (pdf.js)
+- Add a cross-encoder reranking step and measure it with the same eval
+- A bigger eval set, plus answer-level evaluation (does the answer actually match the cited excerpt?)
+
+## License
+
+MIT

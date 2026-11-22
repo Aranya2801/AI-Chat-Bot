@@ -1,59 +1,20 @@
-# Contributing to AI Chat Bot
+# Contributing
 
-Thank you for your interest in contributing! 🎉
-
-## Getting Started
-
-1. **Fork** the repository
-2. **Clone** your fork: `git clone https://github.com/YOUR_USERNAME/AI-Chat-Bot.git`
-3. **Install** dependencies: `npm install`
-4. **Create** a `.env` file from `.env.example` and add your API key
-5. **Start** the dev server: `npm run dev`
-
-## Development Workflow
+Issues and PRs are welcome.
 
 ```bash
-# Create a feature branch
-git checkout -b feature/your-feature-name
-
-# Make your changes, then commit
-git add .
-git commit -m "feat: add your feature description"
-
-# Push and open a PR
-git push origin feature/your-feature-name
+npm install
+cp .env.example .env
+npm run dev
 ```
 
-## Commit Convention
+Before opening a PR, please run:
 
-We follow [Conventional Commits](https://www.conventionalcommits.org/):
+```bash
+npm run lint
+npm test
+```
 
-| Prefix | When to use |
-|--------|-------------|
-| `feat:` | New feature |
-| `fix:` | Bug fix |
-| `docs:` | Documentation |
-| `style:` | Code style (no logic change) |
-| `refactor:` | Code refactor |
-| `perf:` | Performance improvement |
-| `test:` | Adding tests |
-| `chore:` | Build/config changes |
+If you change anything in `src/lib/rag.js` or `src/lib/bm25.js`, also run `npm run eval:retrieval` and include the before/after table in the PR, so we can see whether retrieval got better or worse.
 
-## Code Style
-
-- Run `npm run lint` before committing
-- Run `npm run format` to auto-format
-- Components: PascalCase (`ChatWindow.jsx`)
-- Utilities: camelCase (`chatApi.js`)
-- CSS: BEM-like naming (`.message__body`, `.message--user`)
-
-## Pull Request Guidelines
-
-- Keep PRs focused on one feature/fix
-- Write a clear description
-- Add screenshots for UI changes
-- Link related issues with `Closes #123`
-
-## Questions?
-
-Open a [Discussion](https://github.com/Aranya2801/AI-Chat-Bot/discussions) or reach out via Issues.
+Keep PRs to one change each. For UI changes, add a screenshot.
